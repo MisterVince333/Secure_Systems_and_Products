@@ -7,7 +7,7 @@ This guide consists of two parts. One for [Windows](#windows) and one for [Linux
 ### 1: Setting up
 -   Go to https://www.minecraft.net/en-us/download/server and download the minecraft_server.[VERSION].jar
 -   Create a folder and put the server.jar inside
--   Create a new text document document in the created folder and call it `eula.txt`.
+-   Create a new text document in the created folder and call it `eula.txt`.
 -   Open the text document and add the following content: `eula=true`
 
 ### 2: Creating a Dockerfile
@@ -86,7 +86,7 @@ ___
     ```sh
 	wget https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar
     ```
--   Create a new text document document in the created folder and call it `eula.txt`:
+-   Create a new text document in the created folder and call it `eula.txt`:
     ```sh
 	nano eula.txt
     ```
