@@ -7,8 +7,8 @@ This guide consists of two parts. One for [Windows](#windows) and one for [Linux
 ### 1: Setting up
 -   Go to https://www.minecraft.net/en-us/download/server and download the minecraft_server.[VERSION].jar
 -   Create a folder and put the server.jar inside
--   Create a new textdocument document in the created folder and call it `eula.txt`.
--   Open the textdocument and add the following content: `eula=true`
+-   Create a new text document document in the created folder and call it `eula.txt`.
+-   Open the text document and add the following content: `eula=true`
 
 ### 2: Creating a Dockerfile
 -   In the same folder, make a new file called `Dockerfile`
@@ -38,9 +38,9 @@ This guide consists of two parts. One for [Windows](#windows) and one for [Linux
     ```sh
 	docker run minecraft_server -p 25565:25565 
     ```
-    Once the world is generated, we should be able to connect to the server by entering _localhost_ as the ip address.
+    Once the world is generated, we should be able to connect to the server by entering _localhost_ as the IP address.
 ### 5: Upload the image to Docker Hub
--   Log in to the website https://hub.docker.com and create a new reposiroy. In this case, I will call the repository _minecraft_server_
+-   Log in to the website https://hub.docker.com and create a new repository. In this case, I will call the repository _minecraft_server_
 -   Go back to the terminal we used earlier. Use the command below to indicate/tag which image we want to upload.
     ```sh
 	docker tag [IMAGE ID] [USERNAME]/[TAG]
@@ -60,6 +60,16 @@ This guide consists of two parts. One for [Windows](#windows) and one for [Linux
 	> Note: You must be logged in to Docker via terminal to be able to push. If you haven't already done so, enter the command ```docker login``` first.
 	
 	If all went well, you should now be able to find the repository on Docker Hub.
+### 6: Scanning the image for vulnerabilities
+-   In order to scan the image for vulnerabilities, we use the following command:
+	```sh
+	docker run --rm -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy image [USERNAME]/[TAG]
+	```
+	In my case:
+	```sh
+	docker run --rm -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy image mistervince333/minecraft_server
+	```
+	The terminal will show a list of all vulnerabilities with the severity and the fixed version.
 ___
 ## **Linux**
 
@@ -76,7 +86,7 @@ ___
     ```sh
 	wget https://piston-data.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar
     ```
--   Create a new textdocument document in the created folder and call it `eula.txt`:
+-   Create a new text document document in the created folder and call it `eula.txt`:
     ```sh
 	nano eula.txt
     ```
@@ -112,10 +122,10 @@ ___
     ```sh
 	docker run minecraft_server -p 25565:25565 
     ```
-    Once the world is generated, we should be able to connect to the server by entering _localhost_ as the ip address.
+    Once the world is generated, we should be able to connect to the server by entering _localhost_ as the IP address.
     
 ### 5: Upload the image to Docker Hub
--   Log in to the website https://hub.docker.com and create a new reposiroy. In this case, I will call the repository _minecraft_server_
+-   Log in to the website https://hub.docker.com and create a new repository. In this case, I will call the repository _minecraft_server_
 -   Go back to the terminal and use the command below to indicate/tag which image we want to upload.
     ```sh
 	docker tag [IMAGE ID] [USERNAME]/[TAG]
@@ -135,3 +145,13 @@ ___
 	> Note: You must be logged in to Docker via terminal to be able to push. If you haven't already done so, enter the command ```docker login``` first.
 	
 	If all went well, you should now be able to find the repository on Docker Hub.
+### 6: Scanning the image for vulnerabilities
+-   In order to scan the image for vulnerabilities, we use the following command:
+	```sh
+	docker run --rm -v $(pwd):/root/.cache/ aquasec/trivy image  [USERNAME]/[TAG]
+	```
+	In my case:
+	```sh
+	docker run --rm -v $(pwd):/root/.cache/ aquasec/trivy image  mistervince333/minecraft_server
+	```
+	The terminal will show a list of all vulnerabilities with the severity and the fixed version.
